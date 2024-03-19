@@ -70,3 +70,9 @@ header {
     margin: 0px;
 }
 /**/
+
+/* Event create */
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+    content: "Ieškoti" !important;
+}
+/**/

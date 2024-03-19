@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->text('description');
             $table->dateTime('registration_deadline');
@@ -19,6 +20,8 @@ return new class extends Migration {
             $table->dateTime('end_datetime')->nullable();
             $table->string('max_participants');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
     /**

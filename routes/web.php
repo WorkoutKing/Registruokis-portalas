@@ -29,6 +29,12 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
 Route::get('/events/{event}/register', [EventRegistrationController::class, 'create'])->name('event_registration.create');
 Route::post('/events/{event}/register', [EventRegistrationController::class, 'store'])->name('event_registration.store');
+Route::put('/registrations/{registration}/approve', [EventRegistrationController::class, 'approve'])->name('approve_registration');
+Route::delete('/registrations/{registration}', [EventRegistrationController::class, 'destroy'])->name('registrations.destroy');
+Route::get('/my-registrations', [EventRegistrationController::class, 'myRegistrations'])->name('my_registrations.index');
+Route::get('/my-registrations/{registration}/edit', [EventRegistrationController::class, 'edit'])->name('my_registrations.edit');
+Route::put('/my-registrations/{registration}', [EventRegistrationController::class, 'update'])->name('my_registrations.update');
+
 
 /* Admin Routes */
 Route::group(['middleware' => ['auth', 'admin']], function () {

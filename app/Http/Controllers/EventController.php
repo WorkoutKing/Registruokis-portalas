@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\EventDynamicField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -44,7 +45,10 @@ class EventController extends Controller
             ]
         );
 
+        $userId = Auth::id();
+
         $event = Event::create([
+            'user_id' => $userId,
             'title' => $validatedData['title'],
             'description' => $validatedData['description'],
             'registration_deadline' => $validatedData['registration_deadline'],

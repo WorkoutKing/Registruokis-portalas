@@ -21,4 +21,42 @@ class EventRegistration extends Model
     {
         return $this->hasMany(DynamicField::class);
     }
+
+    public function approve()
+    {
+        if ($this->on_waiting_list == 0) {
+            return false;
+        }
+
+        $this->on_waiting_list = 0;
+        $this->save();
+
+        return true;
+    }
+
+    public function getDynamicFieldOptions()
+    {
+        $options = [];
+
+        if ($this->dynamicFields) {
+            foreach ($this->dynamicFields as $dynamicField) {
+                $options[$dynamicField->title] = $dynamicField->options;
+            }
+        }
+
+        return $options;
+    }
+    public function updateDynamicField($fieldName, $fieldValue)
+    {
+        $dynamicField = $this->dynamicFieldsreg()->where('title', $fieldName)->first();
+
+        if ($dynamicField) {
+            $dynamicField->update(['options' => $fieldValue]);
+        } else {
+            $this->dynamicFieldsreg()->create([
+                'title' => $fieldName,
+                'options' => $fieldValue,
+            ]);
+        }
+    }
 }
