@@ -23,12 +23,12 @@
 
 
         @if ($event->registrations()->count() > $event->max_participants)
-            <span>Jai listas pilnas busite itraukti i laukimo lista </span>
+            <i class="errors_log">Dalyvių sąrašas pilnas busite įtraukti i laukimo sąrašą.</i>
         @else
         @endif
             @if(auth()->check()) {{-- Check if user is authenticated --}}
                 {{-- Registration Form --}}
-                <form action="{{ route('event_registration.store', ['event' => $event->id]) }}" method="POST">
+                <form action="{{ route('event_registration.store', ['event' => $event->id]) }}" method="POST" class="form_event_reg">
                     @csrf
                     <input type="hidden" name="event_id" value="{{ $event->id }}">
                     <div class="form-group">

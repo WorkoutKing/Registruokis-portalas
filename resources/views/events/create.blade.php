@@ -122,9 +122,9 @@
             }
 
             // Log data for debugging
-            console.log("Title:", $(this).closest(".dynamic-field").find("input[name*='title']").val());
-            console.log("Type:", $(this).val());
-            console.log("Options:", $(this).closest(".dynamic-field").find("input[name*='options']").map(function() { return $(this).val(); }).get());
+            //console.log("Title:", $(this).closest(".dynamic-field").find("input[name*='title']").val());
+            //console.log("Type:", $(this).val());
+            //console.log("Options:", $(this).closest(".dynamic-field").find("input[name*='options']").map(function() { return $(this).val(); }).get());
         });
 
         $(document).on("click", ".add-option-btn", function () {

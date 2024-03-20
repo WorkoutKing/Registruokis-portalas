@@ -29,13 +29,14 @@
             </div>
         @endif
 
-        <h1>Visi įvykiai:</h1>
+        <h1>Mano sukurti įvykiai:</h1>
 
         <a href="{{ route('events.create') }}" class="btn btn-primary mb-3">Sukurti įvykį</a>
 
         {{-- Display events in cards with pagination --}}
         <div class="row">
             @foreach ($events as $event)
+                @if (auth()->check() && $event->user_id == auth()->user()->id)
                     <div class="col-md-6 mb-4 my-event-list">
                         <div class="card">
                             <div class="card-body">
@@ -57,10 +58,10 @@
                                 @else
                                     <p class="card-text"><b>Registruotų dalyvių skaičius:</b> {{ $event->max_participants }} / {{ $event->max_participants }}</p>
                                 @endif
-                                <a class="btn btn-success" href="{{ route('event_registration.store', ['event' => $event->id]) }}" style="margin-top:15px;">Registruotis</a>
                             </div>
                         </div>
                     </div>
+                @endif
             @endforeach
         </div>
         {{-- Pagination --}}

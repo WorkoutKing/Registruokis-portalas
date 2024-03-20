@@ -21,7 +21,7 @@
 
         <h1>Koreguoti registracija</h1>
 
-        <form action="{{ route('my_registrations.update', ['registration' => $registration->id]) }}" method="POST">
+        <form action="{{ route('my_registrations.update', ['registration' => $registration->id]) }}" method="POST" class="edit_reg_form">
             @csrf
             @method('PUT')
             <input type="hidden" name="event_id" value="{{ $event->id }}">
