@@ -88,6 +88,10 @@ header {
 /**/
 
 /* Single Event Page */
+span.vote_titl {
+    font-size: 18px;
+    font-weight: 500;
+}
 .event-info {
     margin-top: 20px;
     background-color: #f9f9f9;

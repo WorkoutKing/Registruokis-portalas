@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use App\Models\Event;
+
 
 class HomeController extends Controller
 {
@@ -16,6 +19,7 @@ class HomeController extends Controller
     // }
     public function index()
     {
-        return view('home');
+        $events = Event::orderBy('created_at', 'desc')->paginate(20);
+        return view('home', compact('events'));
     }
 }

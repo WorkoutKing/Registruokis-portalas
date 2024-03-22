@@ -235,10 +235,18 @@
 
                     <span class="event_votes_title">Balsavimų statistika:</span>
                     <div class="event_vote_pos">
+                        @php
+                            // Sort the $optionCounts array based on the count in descending order
+                            arsort($optionCounts);
+                        @endphp
                         @foreach ($optionCounts as $title => $options)
                             <div class="event_vote_container">
-                                <h4>{{ $title }}</h4>
+                                <span class="vote_title">{{ $title }}</span>
                                 <ul>
+                                    @php
+                                        // Sort the options array based on the count in descending order
+                                        arsort($options);
+                                    @endphp
                                     @foreach ($options as $option => $count)
                                         <li>{{ $option }} - {{ $count }}</li>
                                     @endforeach
