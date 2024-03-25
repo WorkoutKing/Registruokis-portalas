@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('surname')->nullable();
+            $table->string('phone')->nullable();
             $table->boolean('privacy_policy')->default(false);
         });
 

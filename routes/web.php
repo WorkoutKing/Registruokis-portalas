@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
@@ -21,6 +22,11 @@ use App\Http\Controllers\EventRegistrationController;
  */
 
 Route::get('/', [HomeController::class, 'index']);
+
+/* User profile */
+Route::get('/profile', [HomeController::class, 'indexUser'])->name('my_profile.indexUser');
+Route::get('/my-profile', [ProfileController::class, 'edit'])->name('my-profile.profile');
+Route::patch('/my-profile/{user}', [ProfileController::class, 'update'])->name('my-profile.update');
 
 /* Events Routes */
 Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
@@ -46,6 +52,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/admin/users/create', [AdminController::class, 'createUser'])->name('admin.users.create');
     Route::post('/admin/users/store', [AdminController::class, 'storeUser'])->name('admin.users.store');
     Route::delete('/admin/users/{id}/delete', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+    Route::get('admin/events', [EventController::class, 'adminEvents'])->name('admin.events');
+    Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+
 });
 
 Auth::routes();

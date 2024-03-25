@@ -53,7 +53,7 @@ class EventRegistrationController extends Controller
                     }
                 }
             }
-            return redirect()->route('events.show', ['event' => $event->id])->with('info', 'Event is full. You have been added to the waiting list.');
+            return redirect()->route('events.show', ['event' => $event->id])->with('info', 'Įvykis pilnas. Jūs esate pridėti į laukimo pozicija.');
 
         } else {
 
@@ -81,31 +81,30 @@ class EventRegistrationController extends Controller
                     }
                 }
             }
-
-            return redirect()->route('events.show', ['event' => $event->id])->with('success', 'Registration successful.');
+            return redirect()->route('events.show', ['event' => $event->id])->with('success', 'Registracija sėkminga.');
         }
     }
     public function approve(EventRegistration $registration)
     {
         if (auth()->user()->id !== $registration->event->user_id) {
-            return redirect()->back()->with('error', 'You do not have permission to approve this registration.');
+            return redirect()->back()->with('error', 'Jūs neturite teisių patvirtinti registracija!');
         }
 
         if ($registration->approve()) {
-            return redirect()->back()->with('success', 'Registration approved successfully.');
+            return redirect()->back()->with('success', 'Registracija patvirtinta sėkmingai.');
         }
 
-        return redirect()->back()->with('info', 'This registration is already approved.');
+        return redirect()->back()->with('info', 'Ši registracija jau patvirtinta.');
     }
     public function destroy(EventRegistration $registration)
     {
         if (auth()->user()->id !== $registration->event->user_id) {
-            return redirect()->back()->with('error', 'You do not have permission to delete this registration.');
+            return redirect()->back()->with('error', 'Jūs neturite teisių ištrinti registracijai.');
         }
 
         $registration->delete();
 
-        return redirect()->back()->with('success', 'Registration deleted successfully.');
+        return redirect()->back()->with('success', 'Registracija ištrinta sėkmingai.');
     }
 
     public function myRegistrations(EventRegistration $registration)
@@ -118,7 +117,7 @@ class EventRegistrationController extends Controller
     public function edit(EventRegistration $registration, Request $request, Event $event)
     {
         if ($registration->user_id !== auth()->id()) {
-            return redirect()->route('event_registration.my_registrations.index')->with('error', 'You do not have permission to edit this registration.');
+            return redirect()->route('event_registration.my_registrations.index')->with('error', 'Jūs neturite teisių redaguoti registracijai.');
         }
 
         $event = $registration->event;
@@ -133,7 +132,7 @@ class EventRegistrationController extends Controller
     public function update(Request $request, EventRegistration $registration)
     {
         if ($registration->user_id !== auth()->id()) {
-            return redirect()->route('event_registration.my_registrations.index')->with('error', 'You do not have permission to update this registration.');
+            return redirect()->route('event_registration.my_registrations.index')->with('error', 'Jūs neturite teisių redaguoti registracijai.');
         }
 
         $validatedData = $request->validate([
@@ -155,7 +154,7 @@ class EventRegistrationController extends Controller
             }
         }
 
-        return redirect()->route('my_registrations.index')->with('success', 'Registration updated successfully.');
+        return redirect()->route('my_registrations.index')->with('success', 'Registracija sėkmingai paredaguota.');
     }
 
 

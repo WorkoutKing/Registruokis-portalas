@@ -102,7 +102,7 @@
                         '<option value="dropdown">Dropdown</option>' +
                     '</select>' +
                     '<div class="options" style="display: none;">' +
-                        '<input type="text" name="dynamic_fields[' + fieldIndex + '][options][]" placeholder="Pasirinkimas" class="form-control">' +
+                        '<input type="text" name="dynamic_fields[' + fieldIndex + '][options][]" placeholder="Pasirinkimas" class="form-control" style="display:none;">' +
                     '</div>' +
                     '<button type="button" class="add-option-btn btn btn-secondary" style="display: none; margin-right:3px;">Pridėti pasirinkimą</button>' +
                     '<button type="button" class="remove-field-btn btn btn-danger">Ištrinti dinaminį lauką</button>' +
@@ -116,10 +116,11 @@
             let addOptionBtn = $(this).closest(".dynamic-field").find(".add-option-btn");
 
             if ($(this).val() === "dropdown") {
+                options.html('<input type="text" name="dynamic_fields[' + $(this).closest(".dynamic-field").index() + '][options][]" placeholder="Pasirinkimas" class="form-control extra-class-input" >');
                 options.show();
                 addOptionBtn.show();
             } else {
-                options.html('<input type="text" name="dynamic_fields[' + $(this).closest(".dynamic-field").index() + '][options][]" placeholder="Pasirinkimas" class="form-control">');
+                {{--  options.html('<input type="text" name="dynamic_fields[' + $(this).closest(".dynamic-field").index() + '][options][]" placeholder="Pasirinkimas" class="form-control extra-class-input" >');  --}}
                 options.show();
                 addOptionBtn.show();
             }
@@ -134,7 +135,7 @@
             let optionsContainer = $(this).prev(".options");
             let optionCount = optionsContainer.children("input").length + 1;
             let fieldName = optionsContainer.closest(".dynamic-field").find("select[name*='type']").attr("name").replace("type", "options");
-            optionsContainer.append('<input type="text" name="' + fieldName + '[]" placeholder="Pasirinkimas ' + optionCount + '" class="form-control">');
+            optionsContainer.append('<input type="text" name="' + fieldName + '[]" placeholder="Pasirinkimas ' + (optionCount - 1) + '" class="form-control">');
         });
 
         $(document).on("click", ".remove-field-btn", function () {

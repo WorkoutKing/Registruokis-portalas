@@ -44,7 +44,6 @@
                                         iki {{ \Carbon\Carbon::parse($event->end_datetime)->format('Y-m-d H:i') }}
                                     @elseif ($event->end_datetime && $event->start_datetime == $event->end_datetime)
                                         {{ \Carbon\Carbon::parse($event->end_datetime)->format('Y-m-d H:i') }}
-
                                     @else
                                         N/A
                                     @endif

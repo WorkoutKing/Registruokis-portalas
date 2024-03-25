@@ -49,7 +49,7 @@ class AdminController extends Controller
 
         $user->roles()->sync([$request->input('role')]);
 
-        return redirect()->back()->with('success', 'User updated successfully.');
+        return redirect()->back()->with('success', 'Sėkmingai išsaugota.');
     }
 
     public function createUser()
@@ -78,7 +78,7 @@ class AdminController extends Controller
 
         $user->roles()->attach($request->input('role'));
 
-        return redirect()->back()->with('success', 'User created successfully.');
+        return redirect()->back()->with('success', 'Vartotojas sėkmingai sukurtas.');
     }
 
     public function deleteUser($id)
@@ -86,7 +86,7 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->back()->with('success', 'User deleted successfully.');
+        return redirect()->back()->with('success', 'Vartotojas sėkmingai ištrintas.');
     }
 
 }

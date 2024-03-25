@@ -22,4 +22,8 @@ class HomeController extends Controller
         $events = Event::orderBy('created_at', 'desc')->paginate(20);
         return view('home', compact('events'));
     }
+    public function indexUser()
+    {
+        return view('my_profile.index');
+    }
 }

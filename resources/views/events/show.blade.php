@@ -99,15 +99,15 @@
                                 <div class="user-details">
                                     <div>
                                         <strong>Vardas/Pavardė:</strong> {{ $registration->name }} {{ $registration->surname }}<br>
-                                        @if (auth()->check() && $event->user_id == auth()->user()->id)
+                                        @if (auth()->check() && $event->user_id == auth()->user()->id || auth()->check() && auth()->user()->isAdmin())
                                             <strong>El.paštas:</strong> {{ $registration->email }}<br>
                                         @endif
                                             <strong>Komentaras:</strong> {{ $registration->comments ?: 'None' }}<br>
-                                        @if (auth()->check() && $event->user_id == auth()->user()->id)
+                                        @if (auth()->check() && $event->user_id == auth()->user()->id || auth()->check() && auth()->user()->isAdmin())
                                             <strong>Telefonas:</strong> {{ $registration->phone }}<br>
                                         @endif
                                     </div>
-                                    @if (auth()->check() && $event->user_id == auth()->user()->id)
+                                    @if (auth()->check() && $event->user_id == auth()->user()->id || auth()->check() && auth()->user()->isAdmin())
                                         <div class="options-list">
                                             <strong>Pasirinkimai:</strong>
                                             <ul>
@@ -132,7 +132,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                @if (auth()->check() && $event->user_id == auth()->user()->id)
+                                @if (auth()->check() && $event->user_id == auth()->user()->id || auth()->check() && auth()->user()->isAdmin())
                                     <div class="actions">
                                         <form action="{{ route('registrations.destroy', ['registration' => $registration->id]) }}" method="POST">
                                             @csrf

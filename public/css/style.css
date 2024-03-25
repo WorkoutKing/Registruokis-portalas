@@ -309,3 +309,62 @@ form.edit_reg_form label {
     margin-bottom: 10px;
 }
 /**/
+
+/* User profile */
+.col-md-6.extra-card {
+    margin-bottom: 30px;
+}
+/**/
+
+/* Hide field */
+input.form-control.extra-class-input {
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    padding: 0px;
+}
+/**/
+
+/* Nav logo */
+a.nav-brand-name {
+    text-decoration: unset;
+}
+/**/
+
+/* Responsive */
+@media only screen and (max-width: 1024px) {
+    .container {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .extra_class_card {
+        margin-bottom: 30px;
+    }
+    h1 {
+        font-size: 28px !important;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .top-nav {
+        width: 100%;
+    }
+    .card-body {
+        padding: 10px !important;
+    }
+    p.card-text b {
+        display: block;
+    }
+    h1 {
+        font-size: 24px !important;
+    }
+    .event-info b {
+        display: block;
+    }
+}
+@media only screen and (max-width: px) {
+}
+@media only screen and (max-width: px) {
+}
+/**/
