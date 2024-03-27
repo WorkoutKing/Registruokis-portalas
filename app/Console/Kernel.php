@@ -7,6 +7,12 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Models\Event;
 use Carbon\Carbon;
 
+/*
+test it
+php artisan schedule:list
+php artisan schedule:run
+
+*/
 class Kernel extends ConsoleKernel
 {
     /**
