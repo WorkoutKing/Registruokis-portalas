@@ -66,6 +66,16 @@
             <label for="max_participants">Maksimalus dalyvių skaičius</label>
         </div>
 
+        <div class="form-floating mb-3">
+            <input type="number" id="duplicate_interval" name="duplicate_interval" class="form-control shadow-sm">
+            <label for="duplicate_interval">Duplikavimo intervalas (dienomis)</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="date" id="duplicate_end_date" name="duplicate_end_date" class="form-control shadow-sm">
+            <label for="duplicate_end_date">Duplikavimo pabaigos data</label>
+        </div>
+
         <div id="dynamic-fields">
             {{--  <div class="dynamic-field">
                 <input type="text" name="dynamic_fields[0][title]" placeholder="Field Title">
@@ -124,12 +134,7 @@
                 options.show();
                 addOptionBtn.show();
             }
-
-            // Log data for debugging
-            //console.log("Title:", $(this).closest(".dynamic-field").find("input[name*='title']").val());
-            //console.log("Type:", $(this).val());
-            //console.log("Options:", $(this).closest(".dynamic-field").find("input[name*='options']").map(function() { return $(this).val(); }).get());
-        });
+});
 
         $(document).on("click", ".add-option-btn", function () {
             let optionsContainer = $(this).prev(".options");

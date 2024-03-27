@@ -51,6 +51,8 @@ class EventController extends Controller
             'start_datetime' => 'required|date',
             'end_datetime' => 'nullable|date|after:start_datetime',
             'max_participants' => 'nullable',
+            'duplicate_interval' => 'nullable',
+            'duplicate_end_date' => 'nullable',
             'dynamic_fields.*.title' => 'nullable|required_if:add_dynamic_fields,true|string|required_with:dynamic_fields.*.type',
             'dynamic_fields.*.type' => 'nullable|string|required_if:add_dynamic_fields,true|in:text,checkbox,dropdown',
             'dynamic_fields.*.options.*' => 'nullable|string|required_if:add_dynamic_fields,true|required_if:dynamic_fields.*.type,dropdown',
@@ -69,6 +71,8 @@ class EventController extends Controller
                 'start_datetime' => $validatedData['start_datetime'],
                 'end_datetime' => $validatedData['end_datetime'],
                 'max_participants' => $validatedData['max_participants'],
+                'duplicate_interval' => $validatedData['duplicate_interval'],
+                'duplicate_end_date' => $validatedData['duplicate_end_date'],
             ]);
 
             if ($request->hasFile('files')) {

@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Role;
 use Illuminate\Validation\Rule;
-
-
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -80,6 +79,12 @@ class RegisterController extends Controller
         // Assign default role to the user
         $defaultRole = Role::find(1); // Assuming role ID 1 is the default role
         $user->roles()->attach($defaultRole);
+
+        // Send welcome email to the user
+        // Mail::send('emails.welcome', ['user' => $user], function ($message) use ($user) {
+        //     $message->to($user->email, $user->name)
+        //         ->subject('Sveiki atvykę');
+        // });
 
         return $user;
     }

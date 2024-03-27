@@ -19,6 +19,8 @@ return new class extends Migration {
             $table->dateTime('start_datetime');
             $table->dateTime('end_datetime')->nullable();
             $table->string('max_participants');
+            $table->unsignedInteger('duplicate_interval')->nullable();
+            $table->date('duplicate_end_date')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

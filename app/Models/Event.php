@@ -14,6 +14,16 @@ use App\Models\EventFile;
 class Event extends Model
 {
     use HasFactory;
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'start_datetime' => 'datetime', // Specify 'start_datetime' as a datetime type
+        'end_datetime' => 'datetime',
+        'duplicate_end_date' => 'datetime',
+    ];
 
     protected $fillable = [
         'user_id',
@@ -22,6 +32,8 @@ class Event extends Model
         'registration_deadline',
         'start_datetime',
         'end_datetime',
+        'duplicate_interval',
+        'duplicate_end_date',
         'max_participants',
     ];
     public function dynamicFields()
