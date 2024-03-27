@@ -133,13 +133,13 @@
                                     @endif
                                 </div>
                                 @if (auth()->check() && $event->user_id == auth()->user()->id || auth()->check() && auth()->user()->isAdmin())
-                                    <div class="actions">
+                                    {{--  <div class="actions">
                                         <form action="{{ route('registrations.destroy', ['registration' => $registration->id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Ištrinti registracija</button>
                                         </form>
-                                    </div>
+                                    </div>  --}}
                                 @endif
                             </li>
                         @endforeach

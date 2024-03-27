@@ -7,7 +7,7 @@ use App\Models\EventRegistration;
 use Illuminate\Http\Request;
 use App\Models\DynamicField;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 
 
 class EventRegistrationController extends Controller
@@ -53,6 +53,11 @@ class EventRegistrationController extends Controller
                     }
                 }
             }
+
+            // Mail::send('emails.registration_not', ['user' => $registration], function ($message) use ($registration) {
+            //     $message->to($registration->email, $registration->name)
+            //         ->subject('Registracija progrese');
+            // });
             return redirect()->route('events.show', ['event' => $event->id])->with('info', 'Įvykis pilnas. Jūs esate pridėti į laukimo pozicija.');
 
         } else {
@@ -81,6 +86,11 @@ class EventRegistrationController extends Controller
                     }
                 }
             }
+
+            // Mail::send('emails.registration_in', ['user' => $registration], function ($message) use ($registration) {
+            //     $message->to($registration->email, $registration->name)
+            //         ->subject('Registracija patvirtinta');
+            // });
             return redirect()->route('events.show', ['event' => $event->id])->with('success', 'Registracija sėkminga.');
         }
     }
@@ -94,15 +104,25 @@ class EventRegistrationController extends Controller
             return redirect()->back()->with('success', 'Registracija patvirtinta sėkmingai.');
         }
 
+        // Mail::send('emails.registration_approve', ['registration' => $registration], function ($message) use ($registration) {
+        //     $message->to($registration->email, $registration->name)
+        //         ->subject('Jūsų registracija patvirtinta');
+        // });
+
         return redirect()->back()->with('info', 'Ši registracija jau patvirtinta.');
     }
     public function destroy(EventRegistration $registration)
     {
-        if (auth()->user()->id !== $registration->event->user_id) {
+        if (auth()->user()->id !== $registration->user_id) {
             return redirect()->back()->with('error', 'Jūs neturite teisių ištrinti registracijai.');
         }
 
         $registration->delete();
+
+        // Mail::send('emails.registration_deleted', ['registration' => $registration], function ($message) use ($registration) {
+        //     $message->to($registration->email, $registration->name)
+        //         ->subject('Jūsų registracija sėkmingai ištrinta');
+        // });
 
         return redirect()->back()->with('success', 'Registracija ištrinta sėkmingai.');
     }

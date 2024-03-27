@@ -46,7 +46,7 @@ class EventController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'files.*' => 'mimes:jpeg,png,pdf',
+            'files.*' => 'nullable|mimes:jpeg,png,pdf',
             'registration_deadline' => 'nullable|date|after_or_equal:today',
             'start_datetime' => 'required|date',
             'end_datetime' => 'nullable|date|after:start_datetime',

@@ -14,7 +14,7 @@
                     <li><a href="/">Pagrindinis</a></li>
                     <li><a href="/events/create">Kurti Renginį</a></li>
                     <li><a href="/profile">Mano Profilis</a></li>
-                    <li><a href="/logout">Atsijungti</a></li>
+                    <li><a href="/logout">Atsijungti, {{ Auth::user()->name }}</a></li>
                 @else
                     <li><a href="/login">Prisijungti</a></li>
                     <li><a href="/register">Registruotis</a></li>
