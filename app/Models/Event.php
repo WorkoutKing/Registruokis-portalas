@@ -19,12 +19,6 @@ class Event extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'start_datetime' => 'datetime', // Specify 'start_datetime' as a datetime type
-        'end_datetime' => 'datetime',
-        'duplicate_end_date' => 'datetime',
-    ];
-
     protected $fillable = [
         'user_id',
         'title',
@@ -32,8 +26,6 @@ class Event extends Model
         'registration_deadline',
         'start_datetime',
         'end_datetime',
-        'duplicate_interval',
-        'duplicate_end_date',
         'max_participants',
     ];
     public function dynamicFields()

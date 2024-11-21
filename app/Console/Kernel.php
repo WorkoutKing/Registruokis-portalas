@@ -20,26 +20,26 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            // Retrieve events eligible for duplication based on duplication interval.
-            $events = Event::whereNotNull('duplicate_interval')->get();
+        // $schedule->call(function () {
+        //     // Retrieve events eligible for duplication based on duplication interval.
+        //     $events = Event::whereNotNull('duplicate_interval')->get();
 
-            foreach ($events as $event) {
-                // Check if it's time to duplicate this event
-                if ($event->start_datetime->diffInDays(Carbon::now()) % $event->duplicate_interval == 0) {
-                    $newEvent = $event->replicate();
-                    // Adjust start and end dates based on duplication interval
-                    $newEvent->start_datetime = $event->start_datetime->addDays($event->duplicate_interval);
-                    $newEvent->end_datetime = $event->end_datetime->addDays($event->duplicate_interval);
-                    $newEvent->save();
-                }
+        //     foreach ($events as $event) {
+        //         // Check if it's time to duplicate this event
+        //         if ($event->start_datetime->diffInDays(Carbon::now()) % $event->duplicate_interval == 0) {
+        //             $newEvent = $event->replicate();
+        //             // Adjust start and end dates based on duplication interval
+        //             $newEvent->start_datetime = $event->start_datetime->addDays($event->duplicate_interval);
+        //             $newEvent->end_datetime = $event->end_datetime->addDays($event->duplicate_interval);
+        //             $newEvent->save();
+        //         }
 
-                // Check if duplication should stop based on the end date
-                if ($event->duplicate_end_date && $event->duplicate_end_date->lte(Carbon::now())) {
-                    $event->update(['duplicate_interval' => null, 'duplicate_end_date' => null]);
-                }
-            }
-        })->everyMinute();
+        //         // Check if duplication should stop based on the end date
+        //         if ($event->duplicate_end_date && $event->duplicate_end_date->lte(Carbon::now())) {
+        //             $event->update(['duplicate_interval' => null, 'duplicate_end_date' => null]);
+        //         }
+        //     }
+        // })->everyMinute();
     }
 
     /**

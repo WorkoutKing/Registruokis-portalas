@@ -9,10 +9,9 @@
             <ul class="top-nav">
                 @if(auth()->check() && auth()->user()->isAdmin())
                     <li><a href="/admin/dashboard">Admin zona</a></li>
+                    <li><a href="/events/create">Kurti Renginį</a></li>
                 @endif
                 @if(Auth::check())
-                    <li><a href="/">Pagrindinis</a></li>
-                    <li><a href="/events/create">Kurti Renginį</a></li>
                     <li><a href="/profile">Mano Profilis</a></li>
                     <li><a href="/logout">Atsijungti, {{ Auth::user()->name }}</a></li>
                 @else

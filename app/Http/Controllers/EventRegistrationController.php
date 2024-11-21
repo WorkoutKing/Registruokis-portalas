@@ -23,7 +23,7 @@ class EventRegistrationController extends Controller
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'required|min:8',
+            'phone' => 'nullable|string|min:8',
             'comments' => 'nullable|string',
         ]);
         $userId = Auth::id();
@@ -34,7 +34,7 @@ class EventRegistrationController extends Controller
                 'name' => $validatedData['name'],
                 'surname' => $validatedData['surname'],
                 'email' => $validatedData['email'],
-                'phone' => $validatedData['phone'],
+                'phone' => $validatedData['phone'] ?? null,
                 'comments' => $validatedData['comments'],
                 'event_id' => $event->id,
                 'user_id' => $userId,
@@ -42,7 +42,7 @@ class EventRegistrationController extends Controller
             ]);
             if ($request->has('dynamic_fields')) {
                 foreach ($request->input('dynamic_fields') as $fieldName => $fieldValue) {
-                    if (!empty ($fieldName) && !empty ($fieldValue)) {
+                    if (!empty($fieldName) && !empty($fieldValue)) {
                         $dynamicField = new DynamicField([
                             'title' => $fieldName,
                             'options' => $fieldValue,
@@ -66,7 +66,7 @@ class EventRegistrationController extends Controller
                 'name' => $validatedData['name'],
                 'surname' => $validatedData['surname'],
                 'email' => $validatedData['email'],
-                'phone' => $validatedData['phone'],
+                'phone' => $validatedData['phone'] ?? null,
                 'comments' => $validatedData['comments'],
                 'event_id' => $event->id,
                 'user_id' => $userId,
@@ -75,7 +75,7 @@ class EventRegistrationController extends Controller
 
             if ($request->has('dynamic_fields')) {
                 foreach ($request->input('dynamic_fields') as $fieldName => $fieldValue) {
-                    if (!empty ($fieldName) && !empty ($fieldValue)) {
+                    if (!empty($fieldName) && !empty($fieldValue)) {
                         $dynamicField = new DynamicField([
                             'title' => $fieldName,
                             'options' => $fieldValue,
@@ -159,7 +159,7 @@ class EventRegistrationController extends Controller
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'required|min:8',
+            'phone' => 'nullable|string|min:8',
             'comments' => 'nullable|string',
             // Add validation rules for event fields if needed
         ]);

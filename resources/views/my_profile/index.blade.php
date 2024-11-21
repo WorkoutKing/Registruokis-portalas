@@ -15,6 +15,7 @@
                     </div>
                 </div>
             </div>
+            @if(auth()->check() && auth()->user()->isAdmin())
             <div class="col-md-6 extra-card">
                 <div class="card">
                     <div class="card-body">
@@ -24,6 +25,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="col-md-6 extra-card">
                 <div class="card">
                     <div class="card-body">

@@ -63,16 +63,6 @@
 
             <div class="event-details">
             </div>
-
-            <button id="copyEventLinkBtn" class="btn btn-primary">Gauti įvykio linką</button>
-
-            @if(auth()->check())
-                <a href="{{ route('event_registration.store', ['event' => $event->id]) }}" class="btn btn-success">Registruotis</a>
-            @else
-                <div class="alert alert-info alert-extra-class">
-                    Prašome <a href="{{ route('login') }}">prisjungti</a> or <a href="{{ route('register') }}">užsiregistruoti</a> mūsų svetainėja kad galėtumėte užsiregistruoti į renginį.
-                </div>
-            @endif
         </div>
             <div class="modal fade" id="eventLinkCopiedModal" tabindex="-1" role="dialog" aria-labelledby="eventLinkCopiedModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -98,11 +88,13 @@
                             <li>
                                 <div class="user-details">
                                     <div>
-                                        <strong>Vardas/Pavardė:</strong> {{ $registration->name }} {{ $registration->surname }}<br>
+                                        <strong>Dalyvis:</strong> {{ $registration->name }} {{ $registration->surname }}<br>
                                         @if (auth()->check() && $event->user_id == auth()->user()->id || auth()->check() && auth()->user()->isAdmin())
                                             <strong>El.paštas:</strong> {{ $registration->email }}<br>
                                         @endif
-                                            <strong>Komentaras:</strong> {{ $registration->comments ?: 'None' }}<br>
+                                            @if ($registration->comments)
+                                                <strong>Komentaras:</strong> {{ $registration->comments }}<br>
+                                            @endif
                                         @if (auth()->check() && $event->user_id == auth()->user()->id || auth()->check() && auth()->user()->isAdmin())
                                             <strong>Telefonas:</strong> {{ $registration->phone }}<br>
                                         @endif
@@ -255,18 +247,6 @@
                         @endforeach
                     </div>
                     {{--  <p>Total options: {{ $totalOptions }}</p>  --}}
-                    <script>
-                        function copyEventLink() {
-                            var eventLink = window.location.href;
-                            navigator.clipboard.writeText(eventLink);
-                            $('#eventLinkCopiedModal').modal('show');
-                            setTimeout(function() {
-                                $('#eventLinkCopiedModal').modal('hide');
-                            }, 2000);
-                        }
-
-                        document.getElementById('copyEventLinkBtn').addEventListener('click', copyEventLink);
-                    </script>
                 </div>
     </div>
 @endsection

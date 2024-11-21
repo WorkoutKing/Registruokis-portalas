@@ -30,7 +30,7 @@ Route::patch('/my-profile/{user}', [ProfileController::class, 'update'])->name('
 
 /* Events Routes */
 Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
-Route::post('/events', [EventController::class, 'store'])->name('events.store');
+Route::post('/events', [EventController::class, 'store'])->name(name: 'events.store');
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/my-events', [EventController::class, 'myevents'])->name('events.myevents');
 Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
